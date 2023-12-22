@@ -4,7 +4,7 @@ AuctionsContract.sol is a smart contract written in solidity. It can create auct
 
 ## Installation
 
-Compile and deploy with remix. https://remix-project.org/
+Compile and deploy with [remix.](https://remix-project.org/)
 
 ## Usage
 

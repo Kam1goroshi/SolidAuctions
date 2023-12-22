@@ -3,7 +3,7 @@
 /// @author Georgios Pappas
 /// @author Christakis Georgiou
 /// @author Stavri Metaxa
-/// @notice This smart contract will hold information about auctions, bidders (and ammount).\n
+/// @notice This smart contract will hold information about auctions, bidders (and ammount).
 ///     When the auction ends the users can either get ownership of the auction or their ETH returned
 pragma solidity 0.8.23;
 
@@ -36,8 +36,8 @@ contract AuctionsContract {
     mapping(uint256 => BID[]) private bidsInAuction;
 
     /// @notice Creates an auction and returns auctionID so it can be looked up
-    /// @notice for easy conversion of time use this calculator: https://www.unixtimestamp.com/
-    /// @notice WARNING: If you use the calculator be mindful of timezones. Calculator uses your local timezone when you enter "Date and Time".
+    /// @notice for easy conversion of time use this calculator: https://www.unixtimestamp.com/  
+    ///     WARNING: If you use the calculator be mindful of timezones. Calculator uses your local timezone when you enter "Date and Time".
     /// @param _auctionName The name of the auction, i.e. Honda Civic
     /// @param _auctionDesc Details, i.e. "used, 10 000km, excellent condition"
     /// @param _auctionStartDate unix timestamp of the starting date.
@@ -71,7 +71,7 @@ contract AuctionsContract {
     }
 
     /// @dev check that the auction exists with require. ID starts counting from 1 so otherwise its default [0]
-    /// @notice Creates a bid based on payment and returns the ID of the bid\n
+    /// @notice Creates a bid based on payment and returns the ID of the bid
     ///     after the auction ends ether will be transfered on loss otherwise auction ownership
     /// @notice if a bid already exists, add the payment to existing bid instead
     /// @param _auctionID the ID of the auction to bid on
@@ -99,7 +99,7 @@ contract AuctionsContract {
         return lastBidID;
     }
 
-    /// @dev check that the auction exists with require. ID starts counting from 1 so otherwise its default [0]
+    /// @dev check that the auction exists with require. ID starts counting from 1 so otherwise its default zero
     /// @return the auction (struct) with given _auction_ID.
     function retrieveAuction(uint256 _auctionID)
         public
@@ -113,7 +113,7 @@ contract AuctionsContract {
         return auctions[_auctionID];
     }
 
-    /// @dev check that the auction exists with require. ID starts counting from 1 so otherwise its default [0]
+    /// @dev check that the auction exists with require. ID starts counting from 1 so otherwise its default zero
     /// @return an array of bids (struct) for the auction with given auction_ID.
     function retrieveBids(uint256 _auctionID)
         public
@@ -127,10 +127,10 @@ contract AuctionsContract {
         return bidsInAuction[_auctionID];
     }
 
-    /// @notice Iterates through the auctions bids to find the biggest.\n
+    /// @notice Iterates through the auctions bids to find the biggest.  
     ///     After transfering ownership to the biggest bidder, returns caller's bid if elligible
-    /// @dev this implementation is not optimal, it is for simplicity. There are many thinigs to consider regarding gas. For example: \n
-    ///     total gas spent to return all bids will be significantly higher, but if one were to return it for all then that one would be unfairly charged.\n
+    /// @dev this implementation is not optimal, it is for simplicity. There are many thinigs to consider regarding gas. For example:  
+    ///     total gas spent to return all bids will be significantly higher, but if one were to return it for all then that one would be unfairly charged.  
     ///     therefore the simplest implementation was followed since this is an assignment. Implement another one if gas is an issue.
     /// @param _auctionID the ID of the auction to be claimed
     /// @return a message or an error message regarding changes
